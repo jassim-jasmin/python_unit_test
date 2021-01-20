@@ -35,3 +35,21 @@ class FileHandler:
 
         except Exception as e:
             print(f"error in FileHandler.save_file(): {str(e)}")
+
+    def read_json(self, file_name: str, path: str = "test"):
+        try:
+            if path:
+                t_path = "/".join([path, file_name])
+
+            else:
+                t_path = file_name
+
+            self.path_complete = f"{t_path}.json"
+
+            with open(self.path_complete) as f:
+                data = json.load(f)
+
+                return data
+
+        except Exception as e:
+            print(f"error in read_json(): {str(e)}")
