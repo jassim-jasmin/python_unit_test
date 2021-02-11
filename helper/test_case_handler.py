@@ -2,10 +2,13 @@ from .input_handler import FileHandler
 
 
 class TestCaseHandler(FileHandler):
+    def __init__(self, test_case_file_name, dir_name):
+        FileHandler.__init__(self, test_case_file_name, dir_name)
+
     def get_test_case(self, module_name: str, function_name, path: str = "test"):
         try:
             file_name = f"test_{module_name}"
-            data = self.read_json(file_name, path)
+            data = self.read_json()
 
             if function_name in data:
                 test_case = data[function_name]

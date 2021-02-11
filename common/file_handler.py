@@ -3,8 +3,11 @@ from pathlib import Path
 
 
 class FileHandler:
-    def __init__(self):
+    def __init__(self, test_case_file_name, dir_name):
         self.path_complete = None
+        self.test_case_file_name = test_case_file_name
+        self.dir_name = dir_name
+        self.path_complete = "/".join([self.dir_name, self.test_case_file_name])
 
     @staticmethod
     def save_json(path, data):
@@ -15,37 +18,22 @@ class FileHandler:
     def create_dir(path: str):
         Path(path).mkdir(parents=True, exist_ok=True)
 
-    def save_file(self, file_name: str, data, path: str="test"):
+    def save_file(self, data):
         try:
-            if path:
-                t_path = "/".join([path, file_name])
-
-            else:
-                t_path = file_name
-
-            self.path_complete = f"{t_path}.json"
-
             self.save_json(self.path_complete, data)
 
         except FileNotFoundError:
             print("dir handling")
-            if path and self.path_complete:
-                self.create_dir(path)
+
+            if self.path_complete:
+                self.create_dir(self.dir_name)
                 self.save_json(self.path_complete, data)
 
         except Exception as e:
             print(f"error in FileHandler.save_file(): {str(e)}")
 
-    def read_json(self, file_name: str, path: str = "test"):
+    def read_json(self):
         try:
-            if path:
-                t_path = "/".join([path, file_name])
-
-            else:
-                t_path = file_name
-
-            self.path_complete = f"{t_path}.json"
-
             with open(self.path_complete) as f:
                 data = json.load(f)
 
