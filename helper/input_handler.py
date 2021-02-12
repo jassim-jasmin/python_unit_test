@@ -3,9 +3,8 @@ from common.module_data_handler import ModuleDataHandler
 
 
 class InputHandler(FileHandler, ModuleDataHandler):
-    def __init__(self, file_name: str, dir_name: str, module_name: str, function_name: str,
+    def __init__(self, dir_name: str, module_name: str, function_name: str,
                  test_case_file_name: str):
-        self.file_name = file_name
         self.module_name = module_name
         self.function_name=function_name
         FileHandler.__init__(self, test_case_file_name, dir_name)

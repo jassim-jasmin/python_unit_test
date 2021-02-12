@@ -25,10 +25,9 @@ class Unit:
     def test(self, func):
         function_name = func.__name__
         module_name = func.__module__
-        file_name = get_current_executing_file_name()
-        test_case_file_name = f"test_{file_name}_{function_name}.json"
-        input_handler = InputHandler(file_name=file_name, dir_name=self.dir_name, module_name=module_name,
-                                     function_name=function_name, test_case_file_name=test_case_file_name)
+        test_case_file_name = f"test_{module_name}_{function_name}.json"
+        input_handler = InputHandler(dir_name=self.dir_name, module_name=module_name, function_name=function_name,
+                                     test_case_file_name=test_case_file_name)
         test_case_handler = TestCaseHandler(test_case_file_name, self.dir_name)
 
         def inner(*arg):

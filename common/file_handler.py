@@ -4,7 +4,6 @@ from pathlib import Path
 
 class FileHandler:
     def __init__(self, test_case_file_name, dir_name):
-        self.path_complete = None
         self.test_case_file_name = test_case_file_name
         self.dir_name = dir_name
         self.path_complete = "/".join([self.dir_name, self.test_case_file_name])
