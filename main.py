@@ -1,22 +1,6 @@
-import inspect
-from common.file_handler import FileHandler
-from py_unit_test import Unit
+from py_unit_test.py_unit_test import UnitTest
 
-unit_test = Unit("hi_test")
-"""
-    file(__module__)
-    {
-        function_name(__name__):
-        {
-            input: 
-                {
-                    arg1:value,
-                    ...
-                }
-        }
-    }
-        
-"""
+unit_test = UnitTest("unit_test")
 
 
 @unit_test.test

@@ -1,10 +1,10 @@
 import inspect
-# from common.file_handler import FileHandler
-from helper.input_handler import InputHandler
-from helper.test_case_handler import TestCaseHandler
-import os
 import ntpath
 import sys
+
+from py_unit_test.helper.input_handler import InputHandler
+from py_unit_test.helper.test_case_handler import TestCaseHandler
+
 
 
 def path_leaf(path):
@@ -18,7 +18,7 @@ def get_current_executing_file_name() -> str:
     return file_name
 
 
-class Unit:
+class UnitTest:
     def __init__(self, dir_name: str = "test"):
         self.dir_name = dir_name
 
@@ -35,9 +35,9 @@ class Unit:
                 p = inspect.getfullargspec(func)
                 argument_variables = p.args
                 argument_values = arg
-                input_handler.register_test_case(argument_variables, argument_values, func)
-                # from_data = test_case_handler.get_test_case(module_name, function_name)
-                test_case_handler.apply_test_case(module_name, function_name, func)
+
+                if result := input_handler.register_test_case(argument_variables, argument_values, func):
+                    test_case_handler.apply_test_case(func, result, function_name)
 
                 # func(arg)
 

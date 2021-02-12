@@ -1,5 +1,5 @@
-from common.file_handler import FileHandler
-from common.module_data_handler import ModuleDataHandler
+from py_unit_test.common.file_handler import FileHandler
+from py_unit_test.common.module_data_handler import ModuleDataHandler
 
 
 class InputHandler(FileHandler, ModuleDataHandler):
@@ -39,6 +39,20 @@ class InputHandler(FileHandler, ModuleDataHandler):
         except Exception as e:
             print(f"Exception in build_input_case(): {str(e)}", param_json, function)
 
+    def create_and_save_test_case(self, function, values, function_data, input_case):
+        result = self.evaluate_function_from_input(function, values)
+
+        if "output" in function_data:
+            function_result = function_data["output"]
+
+        else:
+            function_result = []
+
+        function_result.append(result)
+
+        json_data = {"input": input_case, "output": function_result}
+        self.save_file(json_data)
+
     def register_test_case(self, parameter, values, function):
         try:
             param_json = self.create_json_from_list(parameter, values)
@@ -50,32 +64,12 @@ class InputHandler(FileHandler, ModuleDataHandler):
                     function_data = json_data
 
                 if input_case := self.build_input_case(param_json, function_data):
-                    parameter_as_string = ''
-
-                    for each_param in values:
-                        if isinstance(each_param, int):
-                            parameter_as_string += str(each_param) + ","
-
-                        else:
-                            parameter_as_string += f"'{each_param}'" + ","
-
-                    parameter_as_string = parameter_as_string.lstrip(",")
-
-                    result = eval(f"function({parameter_as_string})")
-
-                    if "output" in function_data:
-                        function_result = function_data["output"]
-
-                    else:
-                        function_result = []
-
-                    function_result.append(result)
-
-                    json_data = {"input": input_case, "output": function_result}
-                    self.save_file(json_data)
+                    self.create_and_save_test_case(function, values, function_data, input_case)
 
                 else:
                     print("values already exist")
+
+                return json_data
 
         except Exception as e:
             print(f"error in register_test_case(): {str(e)}", parameter, values, self.module_name, self.function_name)

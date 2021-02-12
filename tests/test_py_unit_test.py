@@ -8,8 +8,8 @@
 from unittest import TestCase
 import shutil
 
-from py_unit_test import Unit
-from common.file_handler import FileHandler
+from py_unit_test.py_unit_test import UnitTest
+from py_unit_test.common.file_handler import FileHandler
 
 
 class Test(TestCase):
@@ -19,7 +19,7 @@ class Test(TestCase):
         shutil.rmtree(self.test_dir_name)
 
     def test_py_unit_test_handler(self):
-        unit_test = Unit(self.test_dir_name)
+        unit_test = UnitTest(self.test_dir_name)
 
         @unit_test.test
         def sample_function(param):
