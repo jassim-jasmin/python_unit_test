@@ -3,7 +3,7 @@
 import setuptools
 
 setuptools.setup(name='PyUnitTest-MJ',
-      version='0.0.1',
+      version='0.0.3',
       description='Python Unit Test Utilities',
       author='Mohammed Jassim',
       author_email='mohammedjassim.jasmin@gmail.com',

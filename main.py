@@ -1,4 +1,4 @@
-from py_unit_test.py_unit_test import UnitTest
+from py_unit_test import UnitTest
 
 unit_test = UnitTest("unit_test")
 

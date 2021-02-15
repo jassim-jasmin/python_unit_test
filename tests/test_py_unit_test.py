@@ -20,6 +20,7 @@ class Test(TestCase):
 
     def test_py_unit_test_handler(self):
         unit_test = UnitTest(self.test_dir_name)
+        unit_test.arg_handler(['-test'])
 
         @unit_test.test
         def sample_function(param):

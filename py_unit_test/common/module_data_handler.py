@@ -1,5 +1,6 @@
 class ModuleDataHandler:
-    def create_json_from_list(self, key: list, value: list):
+    @staticmethod
+    def create_json_from_list(key: list, value: list):
         parameters = dict()
 
         if len(key) == len(value):
